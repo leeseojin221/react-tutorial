@@ -1,120 +1,67 @@
-import React from "react";
+import {React,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/Header";
 import Container from "../common/Container";
+import * as St from "../styled/MainStyled";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 
 export default function Main() {
   const navigate = useNavigate();
+  const lists = useSelector((state)=>state.내용들);
+
   return (
     <>
       <Header />
       <Container>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            padding: "12px",
-          }}
-        >
-          <button
+        <St.Maindiv1>
+          <St.MainBtn1
             onClick={() => {
               navigate("/create");
             }}
-            style={{
-              border: "none",
-              padding: "8px",
-              borderRadius: "6px",
-              backgroundColor: "skyblue",
-              color: "white",
-              cursor: "pointer",
-            }}
           >
             추가
-          </button>
-        </div>
-        {[1, 2, 3, 4].map((item) => (
-          <div
-            key={item}
-            style={{
-              backgroundColor: "#EEEEEE",
-              height: "100px",
-              borderRadius: "24px",
-              marginBottom: "12px",
-              display: "flex",
-              padding: "12px 16px 12px 16px",
-            }}
+          </St.MainBtn1>
+        </St.Maindiv1>
+        {/* map을 활용해서 임시데이터 받기. 
+        map앞에 임시 데이터 배열을 넣어준다.
+        그러면 map 매소드 함수가 실행되서 item 배열로 다시금 만들어준다. */}
+        {lists.map((item) => (
+          <St.Maindiv2
+          // key값은 nanoid로 고유한 아이디를 만들었기 때문에 사용한다.
+            key={item.id}
           >
-            <div
+            <St.Maindiv3
               onClick={() => {
-                navigate("/detail/1");
-              }}
-              style={{
-                flex: 4,
-                borderRight: "1px solid lightgrey",
-                cursor: "pointer",
+                navigate("detail/:"+item.id);
               }}
             >
-              <h2>제목</h2>
-              <p
-                style={{
-                  width: "300px",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem
-                ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum
-                dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor,
-                sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "end",
-                justifyContent: "space-around",
-                gap: "12px",
-              }}
-            >
-              <div>작성자</div>
+              <h2>{item.title}</h2>
+              <St.MainP>
+              {item.content}
+              </St.MainP>
+            </St.Maindiv3>
+            <St.Maindiv4>
+              <div>{item.author}</div>
               <div>
-                <button
+                {/* 메인 페이지(/), 상세페이지(/detail/:id)에서 수정 버튼 클릭 시 수정 컴포넌트 보여주기 */}
+                <St.MainBtn2
                   onClick={() => {
                     navigate("/edit");
                   }}
-                  style={{
-                    border: "none",
-                    padding: "8px",
-                    borderRadius: "6px",
-                    backgroundColor: "orange",
-                    color: "white",
-                    cursor: "pointer",
-                    marginRight: "6px",
-                  }}
                 >
                   수정
-                </button>
-                <button
+                </St.MainBtn2>
+                <St.MainBtn3
                   onClick={() => {
                     alert("삭제할까?");
                   }}
-                  style={{
-                    border: "none",
-                    padding: "8px",
-                    borderRadius: "6px",
-                    backgroundColor: "red",
-                    color: "white",
-                    cursor: "pointer",
-                  }}
                 >
                   삭제
-                </button>
+                </St.MainBtn3>
               </div>
-            </div>
-          </div>
+            </St.Maindiv4>
+          </St.Maindiv2>
         ))}
       </Container>
     </>

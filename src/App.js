@@ -2,8 +2,13 @@ import { Routes, Route } from "react-router-dom";
 import Main from "./pages/Main";
 import Detail from "./pages/Detail";
 import Create from "./pages/Create";
+import Edit from "./pages/Edit";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 
 function App() {
+
   return (
     // 페이지 이동에 사용되는 Route 태그를 위해선 Routes로 먼저 감싸야 한다.
     <Routes>
@@ -11,9 +16,10 @@ function App() {
       <Route path="/" element={<Main />} />
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/create" element={<Create />} />
-      <Route path="/edit" element={<>수정페이지</>} />
-      <Route path="/signup" element={<>회원가입페이지</>} />
-      <Route path="/login" element={<>로그인페이지</>} />
+      {/* 수정, 로그인, 회원가입 버튼 클릭시 컴포넌트 보여주기 */}
+      <Route path="/edit" element={<Edit />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
