@@ -31,10 +31,7 @@ export default function Main() {
             >
               <h2>제목</h2>
               <St.MainP>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem
-                ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum
-                dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor,
-                sit amet consectetur adipisicing elit.
+                내용
               </St.MainP>
             </St.Maindiv3>
             <St.Maindiv4>

@@ -11,7 +11,9 @@ export default function Header() {
   return (
     <St.CommonHeader>
       <St.CommonH1>
-        <FaHome />
+        {/* //1.홈 로고 클릭 시 메인페이지(/)로 이동 */}
+        <FaHome onClick={() => {navigate("/");}}
+        />
       </St.CommonH1>
       <St.Commondiv>
         <Link to="/login">로그인</Link>
