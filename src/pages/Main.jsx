@@ -2,119 +2,61 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/Header";
 import Container from "../common/Container";
+import * as St from "../styled/MainStyled"
 
 export default function Main() {
   const navigate = useNavigate();
+
   return (
     <>
       <Header />
       <Container>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "end",
-            padding: "12px",
-          }}
-        >
-          <button
+        <St.Maindiv1>
+          <St.MainBtn1
             onClick={() => {
               navigate("/create");
             }}
-            style={{
-              border: "none",
-              padding: "8px",
-              borderRadius: "6px",
-              backgroundColor: "skyblue",
-              color: "white",
-              cursor: "pointer",
-            }}
           >
             추가
-          </button>
-        </div>
+          </St.MainBtn1>
+        </St.Maindiv1>
         {[1, 2, 3, 4].map((item) => (
-          <div
+          <St.Maindiv2
             key={item}
-            style={{
-              backgroundColor: "#EEEEEE",
-              height: "100px",
-              borderRadius: "24px",
-              marginBottom: "12px",
-              display: "flex",
-              padding: "12px 16px 12px 16px",
-            }}
           >
-            <div
+            <St.Maindiv3
               onClick={() => {
                 navigate("/detail/1");
               }}
-              style={{
-                flex: 4,
-                borderRight: "1px solid lightgrey",
-                cursor: "pointer",
-              }}
             >
               <h2>제목</h2>
-              <p
-                style={{
-                  width: "300px",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  whiteSpace: "nowrap",
-                }}
-              >
+              <St.MainP>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit.Lorem
                 ipsum dolor, sit amet consectetur adipisicing elit.Lorem ipsum
                 dolor, sit amet consectetur adipisicing elit.Lorem ipsum dolor,
                 sit amet consectetur adipisicing elit.
-              </p>
-            </div>
-            <div
-              style={{
-                flex: 1,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "end",
-                justifyContent: "space-around",
-                gap: "12px",
-              }}
-            >
+              </St.MainP>
+            </St.Maindiv3>
+            <St.Maindiv4>
               <div>작성자</div>
               <div>
-                <button
+                <St.MainBtn2
                   onClick={() => {
                     navigate("/edit");
                   }}
-                  style={{
-                    border: "none",
-                    padding: "8px",
-                    borderRadius: "6px",
-                    backgroundColor: "orange",
-                    color: "white",
-                    cursor: "pointer",
-                    marginRight: "6px",
-                  }}
                 >
                   수정
-                </button>
-                <button
+                </St.MainBtn2>
+                <St.MainBtn3
                   onClick={() => {
                     alert("삭제할까?");
                   }}
-                  style={{
-                    border: "none",
-                    padding: "8px",
-                    borderRadius: "6px",
-                    backgroundColor: "red",
-                    color: "white",
-                    cursor: "pointer",
-                  }}
                 >
                   삭제
-                </button>
+                </St.MainBtn3>
               </div>
-            </div>
-          </div>
+            </St.Maindiv4>
+          </St.Maindiv2>
         ))}
       </Container>
     </>
