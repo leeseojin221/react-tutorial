@@ -13,8 +13,6 @@ export default function Detail() {
   const {id} = useParams();
   const list = lists.find((list) => list.id === id);
 
-  console.log(list);
-
   return (
     <>
       <Header />
