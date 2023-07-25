@@ -37,6 +37,7 @@ export default function Main() {
             <St.Maindiv4>
               <div>작성자</div>
               <div>
+                {/* 메인 페이지(/), 상세페이지(/detail/:id)에서 수정 버튼 클릭 시 수정 컴포넌트 보여주기 */}
                 <St.MainBtn2
                   onClick={() => {
                     navigate("/edit");
