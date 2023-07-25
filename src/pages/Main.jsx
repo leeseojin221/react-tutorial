@@ -33,7 +33,7 @@ export default function Main() {
           >
             <St.Maindiv3
               onClick={() => {
-                navigate("detail/:"+item.id);
+                navigate("detail/"+item.id);
               }}
             >
               <h2>{item.title}</h2>

@@ -13,20 +13,17 @@ export default function Detail() {
   const {id} = useParams();
   const list = lists.find((list) => list.id === id);
 
-  console.log(lists);
   console.log(list);
-
-
 
   return (
     <>
       <Header />
       <Container>
         <St.DetailH1>
-          제목
+          {list.title}
         </St.DetailH1>
         <St.DetailDiv1>
-          내용
+          {list.content}
         </St.DetailDiv1>
         <St.DetailDiv2>
           <St.DetailBtn1
