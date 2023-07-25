@@ -1,11 +1,27 @@
-import React from "react";
+import {React,useState} from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/Header";
 import Container from "../common/Container";
-import * as St from "../styled/MainStyled"
+import * as St from "../styled/MainStyled";
+import { nanoid } from "nanoid";
 
 export default function Main() {
   const navigate = useNavigate();
+
+  const [List, SetList] = useState([
+    {id: nanoid(),
+     title: "제목1",
+     content: "내용1",
+     author: "작성자1"},
+     {id:nanoid(),
+     title: "제목2",
+     content: "내용2",
+     author: "작성자2"},
+     {id:nanoid(),
+     title: "제목3",
+     content: "내용3",
+     author: "작성자3"},
+  ])
 
   return (
     <>
@@ -20,22 +36,26 @@ export default function Main() {
             추가
           </St.MainBtn1>
         </St.Maindiv1>
-        {[1, 2, 3, 4].map((item) => (
+        {/* map을 활용해서 임시데이터 받기. 
+        map앞에 임시 데이터 배열을 넣어준다.
+        그러면 map 매소드 함수가 실행되서 item 배열로 다시금 만들어준다. */}
+        {List.map((item) => (
           <St.Maindiv2
-            key={item}
+          // key값은 nanoid로 고유한 아이디를 만들었기 때문에 사용한다.
+            key={item.id}
           >
             <St.Maindiv3
               onClick={() => {
                 navigate("/detail/1");
               }}
             >
-              <h2>제목</h2>
+              <h2>{item.title}</h2>
               <St.MainP>
-                내용
+              {item.content}
               </St.MainP>
             </St.Maindiv3>
             <St.Maindiv4>
-              <div>작성자</div>
+              <div>{item.author}</div>
               <div>
                 {/* 메인 페이지(/), 상세페이지(/detail/:id)에서 수정 버튼 클릭 시 수정 컴포넌트 보여주기 */}
                 <St.MainBtn2
