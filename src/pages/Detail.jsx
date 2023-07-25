@@ -1,4 +1,5 @@
-import {React, useParams} from "react";
+import React from "react";
+import { useParams } from "react-router-dom/dist";
 import Header from "../common/Header";
 import Container from "../common/Container";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,11 @@ export default function Detail() {
   const lists = useSelector((state)=>state.내용들);
   const {id} = useParams();
   const list = lists.find((list) => list.id === id);
+
+  console.log(lists);
+  console.log(list);
+
+
 
   return (
     <>
