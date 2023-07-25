@@ -1,11 +1,17 @@
-import React from "react";
+import {React, useParams} from "react";
 import Header from "../common/Header";
 import Container from "../common/Container";
 import { useNavigate } from "react-router-dom";
 import * as St from "../styled/DetailStyled"
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 
 export default function Detail() {
   const navigate = useNavigate();
+  const lists = useSelector((state)=>state.내용들);
+  const {id} = useParams();
+  const list = lists.find((list) => list.id === id);
+
   return (
     <>
       <Header />
