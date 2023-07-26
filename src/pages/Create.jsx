@@ -1,13 +1,16 @@
-import React,{useState,Fragment} from "react";
+import React,{useState} from "react";
 import * as St from "../styled/CreateStyled";
 import Header from "../common/Header";
 import Container from "../common/Container";
-import { useDispatch } from "react-redux";
-import { addItem } from "../index";
+import { useNavigate } from "react-router";
+import { nanoid } from "nanoid";
 
-export default function Create() {
-  
-  const dispatch = useDispatch()
+export default function Create({list, setList}) {
+
+  const [items,setItems] = useState(list);
+
+  const navigate = useNavigate();
+
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 
@@ -16,12 +19,19 @@ export default function Create() {
     e.preventDefault();
 
     const newItem = {
+      id: nanoid(),
       title,
       content,
+      author:"작성자",
     };
-    dispatch(addItem(newItem));
+    const updatedItems = [...items, newItem];
+    setItems(updatedItems);
+    setList(updatedItems);
+
     setTitle(``);
     setContent(``);
+
+    navigate("/");
   }
 
 
