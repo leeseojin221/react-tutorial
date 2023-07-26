@@ -4,11 +4,19 @@ import Header from "../common/Header";
 import Container from "../common/Container";
 import * as St from "../styled/MainStyled";
 import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from 'react-redux';
+import { deleteItem } from '../index';
 
 
 export default function Main() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const lists = useSelector((state)=>state.내용들);
+
+  const handleDeleteItem = (id) => {
+    dispatch(deleteItem(id));
+    navigate("/");
+  }
 
   return (
     <>
@@ -47,14 +55,14 @@ export default function Main() {
                 {/* 메인 페이지(/), 상세페이지(/detail/:id)에서 수정 버튼 클릭 시 수정 컴포넌트 보여주기 */}
                 <St.MainBtn2
                   onClick={() => {
-                    navigate("/edit");
+                    navigate("edit/"+item.id);
                   }}
                 >
                   수정
                 </St.MainBtn2>
                 <St.MainBtn3
                   onClick={() => {
-                    alert("삭제할까?");
+                    handleDeleteItem(item.id);
                   }}
                 >
                   삭제

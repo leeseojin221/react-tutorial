@@ -35,6 +35,18 @@ const lists = createSlice({
         author: "작성자",
       });
     },
+    editItem: (state, action) => {
+      const { id, title, content } = action.payload;
+      const itemToUpdate = state.find(item => item.id === id);
+      if (itemToUpdate) {
+        itemToUpdate.title = title;
+        itemToUpdate.content = content;
+      }
+    },
+    deleteItem: (state, action) => {
+      const id = action.payload;
+      return state.filter(item => item.id !== id);
+    },
   },
 });
 
@@ -44,7 +56,7 @@ const store = configureStore({
   },
 });
 
-export const { addItem } = lists.actions;
+export const { addItem, editItem, deleteItem } = lists.actions;
 export default lists.reducer;
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

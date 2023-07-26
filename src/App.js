@@ -17,7 +17,7 @@ function App() {
       <Route path="/detail/:id" element={<Detail />} />
       <Route path="/create" element={<Create />} />
       {/* 수정, 로그인, 회원가입 버튼 클릭시 컴포넌트 보여주기 */}
-      <Route path="/edit" element={<Edit />} />
+      <Route path="/edit/:id" element={<Edit />} />
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
     </Routes>
