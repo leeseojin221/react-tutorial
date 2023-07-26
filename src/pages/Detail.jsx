@@ -1,41 +1,51 @@
-import React from "react";
+import React,{useState} from "react";
 import { useParams } from "react-router-dom/dist";
 import Header from "../common/Header";
 import Container from "../common/Container";
 import { useNavigate } from "react-router-dom";
 import * as St from "../styled/DetailStyled"
-import { useSelector } from "react-redux/es/hooks/useSelector";
 
 
-export default function Detail() {
+export default function Detail({list,setList}) {
+
+  const [items, setItems] = useState(list)
+
   const navigate = useNavigate();
-  const lists = useSelector((state)=>state.내용들);
   const {id} = useParams();
-  const list = lists.find((list) => list.id === id);
+  const lists = items.find((item) => item.id === id);
 
-  console.log(list);
+  const handleDeleteItem = (id) => {
+
+    const confirmDelete = window.confirm('삭제하시겠습니까?');
+    if(confirmDelete){
+      const updatedList = items.filter((item) => item.id !== id);
+      setItems(updatedList);
+      setList(updatedList);
+      navigate("/");
+    }
+  }
 
   return (
     <>
       <Header />
       <Container>
         <St.DetailH1>
-          {list.title}
+          {lists.title}
         </St.DetailH1>
         <St.DetailDiv1>
-          {list.content}
+          {lists.content}
         </St.DetailDiv1>
         <St.DetailDiv2>
           <St.DetailBtn1
             onClick={() => {
-              navigate("/edit");
+              navigate("/edit/"+lists.id);
             }}
           >
             수정
           </St.DetailBtn1>
           <St.DetailBtn2
             onClick={() => {
-              alert("삭제할까?");
+              handleDeleteItem(lists.id);
             }}
           >
             삭제
