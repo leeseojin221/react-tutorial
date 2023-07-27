@@ -42,3 +42,20 @@
 7. **메인페이지** 혹은 **상세페이지**에서 **삭제 버튼** 클릭 시 `useState`의 데이터에서 **해당 데이터를 삭제**합니다.
    - 삭제 후 자동으로 메인페이지로 이동하도록 만들어주세요.
    - **hint**: Link 혹은 useNavigate 활용
+
+## 과제2 요구사항
+
+<aside>
+❗ **과제1 useState & react-router-dom** 과제 마무리 후 아래 과제를 실시합니다. 
+과제1을 마무리 못한 경우 아래 과제는 주말에 진행해도 괜찮습니다.
+
+❗과제의 목표는 **학습**임을 잊지마세요. useState를 못하면 **redux-toolkit은 의미가 없습니다.**
+
+</aside>
+
+1. **redux toolkit**에 필요한 **패키지 설치**하기
+2. **redux toolkit** 사용을 위한 **기본 세팅**하기
+3. useState의 **초기값**을 redux toolkit의 **initialState**에 넣기
+4. **useSelector**를 이용하여 **데이터 보여주기**
+5. 추가, 수정, 삭제 **Reducers** 만들기
+6. **useDispatch** 활용하여 **추가, 수정, 삭제 적용**하기

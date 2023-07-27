@@ -4,26 +4,29 @@ import Container from "../common/Container";
 import * as St from "../styled/EditStyled";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { editItem } from "../index";
 
-export default function Edit({list, setList}) {
+export default function Edit() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const lists = useSelector((state)=>state.내용들);
 
-  const [items,setItems] = useState(list);
-
- 
   const {id} = useParams();
-  const lists = items.find((items) => items.id === id);
+  const list = lists.find((lists) => lists.id === id);
 
-  const [title, setTitle] = useState(lists.title ||'');
-  const [content, setContent] = useState(lists.content ||'');
+  const [title, setTitle] = useState(list.title ||'');
+  const [content, setContent] = useState(list.content ||'');
 
   const handleEditItem = (id) => {
 
-    const updatedList = items.map((item)=>
-      item.id === id ? {...item, title, content} : item);
-      setItems(updatedList);
-      setList(updatedList);
+    const updatedItem = {
+      id,
+      title,
+      content,
+    };
 
+    dispatch(editItem(updatedItem));
     navigate("/");
     setTitle('');
     setContent('');
@@ -42,7 +45,7 @@ export default function Edit({list, setList}) {
         >
           <div>
             <St.EditInput1
-              placeholder={lists.title}
+              placeholder={list.title}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -50,12 +53,12 @@ export default function Edit({list, setList}) {
           </div>
           <St.EditDiv1>
             <St.EditText1
-              placeholder={lists.content}
+              placeholder={list.content}
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
           </St.EditDiv1>
-          <St.EditBtn1 onClick={() => handleEditItem(lists.id)}>
+          <St.EditBtn1 onClick={() => handleEditItem(list.id)}>
             수정하기
           </St.EditBtn1>
         </St.EditForm1>
