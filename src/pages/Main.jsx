@@ -1,21 +1,23 @@
-import {React, useState} from "react";
+import {React} from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../common/Header";
 import Container from "../common/Container";
 import * as St from "../styled/MainStyled";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useDispatch } from "react-redux";
+import { deleteItem } from "../index";
 
 
-export default function Main({list, setList}) {
-  const [items, setItems] = useState(list);
-
+export default function Main() {
+ 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const lists = useSelector((state)=>state.내용들);
 
   const handleDeleteItem = (id) => {
     const confirmDelete = window.confirm('삭제하시겠습니까?');
     if(confirmDelete){
-      const updatedList = items.filter((item) => item.id !== id);
-      setItems(updatedList);
-      setList(updatedList);
+      dispatch(deleteItem(id));
       navigate("/");
     }
   }
@@ -36,7 +38,7 @@ export default function Main({list, setList}) {
         {/* map을 활용해서 임시데이터 받기. 
         map앞에 임시 데이터 배열을 넣어준다.
         그러면 map 매소드 함수가 실행되서 item 배열로 다시금 만들어준다. */}
-        {items.map((item) => (
+        {lists.map((item) => (
           <St.Maindiv2
           // key값은 nanoid로 고유한 아이디를 만들었기 때문에 사용한다.
             key={item.id}
