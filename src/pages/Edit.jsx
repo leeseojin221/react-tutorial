@@ -5,18 +5,18 @@ import * as St from "../styled/EditStyled";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { editItem } from "../index";
+import { editItem } from "../redux/list";
 
 export default function Edit() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const lists = useSelector((state)=>state.내용들);
+  const list = useSelector((state)=>state.내용들);
 
   const {id} = useParams();
-  const list = lists.find((lists) => lists.id === id);
+  const post = list.find((post) => post.id === id);
 
-  const [title, setTitle] = useState(list.title ||'');
-  const [content, setContent] = useState(list.content ||'');
+  const [title, setTitle] = useState(post?.title ||'');
+  const [content, setContent] = useState(post?.content ||'');
 
   const handleEditItem = (id) => {
 
@@ -40,12 +40,12 @@ export default function Edit() {
         <St.EditForm1
           onSubmit={(e) => {
             e.preventDefault();
-            console.log("수정!");
+            handleEditItem(post.id)
           }}
         >
           <div>
             <St.EditInput1
-              placeholder={list.title}
+              placeholder={post?.title}
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -53,12 +53,12 @@ export default function Edit() {
           </div>
           <St.EditDiv1>
             <St.EditText1
-              placeholder={list.content}
+              placeholder={post?.content}
               value={content}
               onChange={(e) => setContent(e.target.value)}
             />
           </St.EditDiv1>
-          <St.EditBtn1 onClick={() => handleEditItem(list.id)}>
+          <St.EditBtn1>
             수정하기
           </St.EditBtn1>
         </St.EditForm1>

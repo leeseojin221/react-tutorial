@@ -4,7 +4,7 @@ import Header from "../common/Header";
 import Container from "../common/Container";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
-import { addItem } from '../index';
+import { addItem } from '../redux/list';
 
 export default function Create() {
 
