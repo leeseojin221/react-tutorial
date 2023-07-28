@@ -5,7 +5,7 @@ import Container from "../common/Container";
 import * as St from "../styled/MainStyled";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { deleteItem } from "../index";
+import { deleteItem } from "../redux/list";
 
 
 export default function Main() {
@@ -45,7 +45,7 @@ export default function Main() {
           >
             <St.Maindiv3
               onClick={() => {
-                navigate("detail/"+item.id);
+                navigate("detail/"+item?.id);
               }}
             >
               <h2>{item.title}</h2>
@@ -59,7 +59,7 @@ export default function Main() {
                 {/* 메인 페이지(/), 상세페이지(/detail/:id)에서 수정 버튼 클릭 시 수정 컴포넌트 보여주기 */}
                 <St.MainBtn2
                   onClick={() => {
-                    navigate("edit/"+item.id);
+                    navigate("edit/"+item?.id);
                   }}
                 >
                   수정

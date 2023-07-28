@@ -6,16 +6,16 @@ import { useNavigate } from "react-router-dom";
 import * as St from "../styled/DetailStyled"
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
-import { deleteItem } from "../index";
+import { deleteItem } from "../redux/list";
 
 
 export default function Detail() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const lists = useSelector((state)=>state.내용들);
+  const list = useSelector((state)=>state.내용들);
   const {id} = useParams();
-  const list = lists.find((lists) => lists.id === id);
+  const post = list.find((post) => post.id === id);
 
   const handleDeleteItem = (id) => {
 
@@ -31,22 +31,22 @@ export default function Detail() {
       <Header />
       <Container>
         <St.DetailH1>
-          {list.title}
+          {post?.title || ''}
         </St.DetailH1>
         <St.DetailDiv1>
-          {list.content}
+          {post?.content || ''}
         </St.DetailDiv1>
         <St.DetailDiv2>
           <St.DetailBtn1
             onClick={() => {
-              navigate("/edit/"+list.id);
+              navigate("/edit/"+post?.id);
             }}
           >
             수정
           </St.DetailBtn1>
           <St.DetailBtn2
             onClick={() => {
-              handleDeleteItem(list.id);
+              handleDeleteItem(post.id);
             }}
           >
             삭제
