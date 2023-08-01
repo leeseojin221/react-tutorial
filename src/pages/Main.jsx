@@ -20,11 +20,31 @@ export default function Main() {
     })
   }, [])
 
-  const handleDeleteItem = (id) => {
+  const handleDeleteItem = (id, author) => {
     const confirmDelete = window.confirm('삭제하시겠습니까?')
     if (confirmDelete) {
-      dispatch(deleteItem(id))
+      if (user) {
+        if (user.email === author) {
+          dispatch(deleteItem(id))
+        } else {
+          alert(`삭제할 권한이 없습니다.`)
+        }
+      } else {
+        navigate('/login')
+      }
       navigate('/')
+    }
+  }
+
+  const handleEditBtn = (id, author) => {
+    if (user) {
+      if (user.email === author) {
+        navigate('edit/' + id)
+      } else {
+        alert(`수정할 권한이 업습니다.`)
+      }
+    } else {
+      navigate('/login')
     }
   }
 
@@ -63,16 +83,10 @@ export default function Main() {
               <div>{item.author}</div>
               <div>
                 {/* 메인 페이지(/), 상세페이지(/detail/:id)에서 수정 버튼 클릭 시 수정 컴포넌트 보여주기 */}
-                <St.MainBtn2
-                  onClick={() => {
-                    navigate('edit/' + item?.id)
-                  }}
-                >
-                  수정
-                </St.MainBtn2>
+                <St.MainBtn2 onClick={() => handleEditBtn(item.id, item.author)}>수정</St.MainBtn2>
                 <St.MainBtn3
                   onClick={() => {
-                    handleDeleteItem(item.id)
+                    handleDeleteItem(item.id, item.author)
                   }}
                 >
                   삭제
