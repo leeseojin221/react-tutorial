@@ -22,12 +22,12 @@ const list = createSlice({
     },],
     reducers: {
         addItem: (state, action) => {
-            const { title, content } = action.payload;
+            const { title, content, author } = action.payload;
             state.push({
                 id: nanoid(),
                 title,
                 content,
-                author: "작성자",
+                author,
             });
         },
         editItem: (state, action) => {
